@@ -63,8 +63,6 @@ def summarize(expense_file_path):
                 amount=expense_amount,
                 category=expense_catgory
             )
-            print(line_expense)
             expense.append(line_expense)
-    print(expense)
 if __name__=="__main__":
     main()
