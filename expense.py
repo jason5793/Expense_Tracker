@@ -5,5 +5,5 @@ class Expense:
         self.amount=amount
         
     def __repr__(self) -> str:
-        return f"<Expense:{self.name},{self.category},${self.amount:}>"
+        return f"<Expense:{self.name},{self.category},₹{self.amount:}>"
         

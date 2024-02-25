@@ -1,4 +1,5 @@
 from expense import Expense
+from typing import List
 
 def main():
     print(f"Running expense file ")
@@ -53,7 +54,7 @@ def save_expense_to_file(expense:Expense,expense_file_path):
 
 def summarize(expense_file_path):
     print(f"Summarize user expense:")
-    expense=[]
+    expenses:list[Expense]=[]
     with open(expense_file_path, "r") as f:
         lines=f.readlines()
         for line in lines:
@@ -63,6 +64,19 @@ def summarize(expense_file_path):
                 amount=expense_amount,
                 category=expense_catgory
             )
-            expense.append(line_expense)
+            expenses.append(line_expense)
+
+    amount_by_category = {}
+    for expense in expenses:
+        key=expense.category
+        if key in amount_by_category:
+            amount_by_category[key]+=expense.amount
+        else:
+            amount_by_category[key]=expense.amount
+    
+    print("Expense by Category:")
+    for key, amount in amount_by_category.items():
+        print(f"{key}: ₹{amount}")
+
 if __name__=="__main__":
     main()
