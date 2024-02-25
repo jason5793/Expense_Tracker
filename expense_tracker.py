@@ -2,15 +2,16 @@ from expense import Expense
 
 def main():
     print(f"Running expense file ")
+
+    expense_file_path="expenses.csv"
     
     #get user to input their text 
     expense=get_user_expense()
-    print(expense)
     # write their expense to file 
-    save_expense_to_file
+    save_expense_to_file(expense,expense_file_path)
 
     # read the file and summrasize all the expenses 
-    summarize()
+    summarize(expense_file_path)
 
 def get_user_expense():
     print("Getting user expense:")
@@ -42,10 +43,15 @@ def get_user_expense():
         else:
             print("Invalid Category. Please try again")
 
-def save_expense_to_file():
-    print(f"Save user expense:")
 
-def summarize():
+
+def save_expense_to_file(expense:Expense,expense_file_path):
+    print(f"Save user expense:{expense} to{expense_file_path}")
+    with open(expense_file_path,"a") as f:
+        f.write(f"{expense.name},{expense.category},{expense.amount}\n")
+
+
+def summarize(expense_file_path):
     print(f"Summarize user expense:")
 
 if __name__=="__main__":
