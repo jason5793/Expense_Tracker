@@ -1,8 +1,11 @@
+from expense import Expense
+
 def main():
     print(f"Running expense file ")
     
     #get user to input their text 
-    get_user_expense()
+    expense=get_user_expense()
+    print(expense)
     # write their expense to file 
     save_expense_to_file
 
@@ -13,7 +16,7 @@ def get_user_expense():
     print("Getting user expense:")
     expense_name=input("Enter expense name:")
     expense_amount=float(input("Enter expense amount:"))
-    print(f"You have entered:{expense_name},{expense_amount}")
+
 
     expense_categories=[
         "Food",
@@ -22,15 +25,20 @@ def get_user_expense():
         "Fun",
         "Misc",
     ]
+
+
     while True:
         print("Select a Category: ")
         for i,category_name in enumerate(expense_categories):
             print(f"{i+1}. {category_name}")
         value_range =f"[1-{len(expense_categories)}]"
         select_index=int(input(f"Enter a category number{value_range}:"))-1
-        
         if select_index in range(len(expense_categories)):
-            break
+            selected_catgegory=expense_categories[select_index]
+            new_expense=Expense(
+                name=expense_name,category=selected_catgegory,amount=expense_amount
+            )
+            return new_expense
         else:
             print("Invalid Category. Please try again")
 
